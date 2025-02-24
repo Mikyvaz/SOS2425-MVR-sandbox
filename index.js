@@ -9,7 +9,7 @@ app.get("/",(request, response) => {
 });
 
 
-app.get("/sara",(request, response) => {
+app.get("/",(request, response) => {
     response.send("Love u Sarita la brauni");
 });
 app.listen(PORT,() =>{
