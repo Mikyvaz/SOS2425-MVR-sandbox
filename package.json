@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Mikyvaz/SOS2425-MVR-sandbox/issues"
   },
-  "homepage": "https://github.com/Mikyvaz/SOS2425-MVR-sandbox#readme"
+  "homepage": "https://github.com/Mikyvaz/SOS2425-MVR-sandbox#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
