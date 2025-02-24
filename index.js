@@ -8,10 +8,8 @@ app.get("/",(request, response) => {
     response.send("Hi Server!");
 });
 
-app.get("/cool",(request, response) => {
-    response.send(cool());
-});
-app.get("/cool",(request, response) => {
+
+app.get("/sara",(request, response) => {
     response.send("Love u Sarita la brauni");
 });
 app.listen(PORT,() =>{
