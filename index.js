@@ -1,7 +1,7 @@
 //Constantes
 const express = require("express");
 const app = express();
-const PORT = 16078;
+const PORT = process.env.PORT || 16078;
 const cool = require("cool-ascii-faces");
 //Codigo
 app.get("/",(request, response) => {
