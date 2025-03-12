@@ -7,7 +7,9 @@ const cool = require("cool-ascii-faces");
 app.get("/",(request, response) => {
     response.send("Love u Sarita la brauni!!");
 });
-
+app.get("/guay", (request, response) =>{
+    response.send(`Vamos a ver que pasa si pongo esto así.`)
+})
 
 app.get("/",(request, response) => {
     response.send("Love u Sarita la brauni");
