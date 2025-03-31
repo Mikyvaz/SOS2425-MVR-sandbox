@@ -1,8 +1,10 @@
 
+import dataStore from "@seald-io/nedb";
 
-import dataStore from "nedb";
 const BASE_API = "/api/v1";
-let db = new dataStore();
+
+let db = new dataStore({ filename: "contacts.db", autoload: true });
+
 
 
 
@@ -21,19 +23,32 @@ let initialContacts = [
     }
 ]
 
-db.find({}, (err, contacts)=>{
-    if (contacts.length < 1){
-        db.insert(initialContacts); //faltaría tratar los errores y eso. 
-
+db.find({}, (err, contacts) => {
+    if (err) {
+        console.error("Error al buscar contactos:", err);
+        return;
     }
-}); // buc
+
+    if (contacts.length < 1) {
+        db.insert(initialContacts, (err, newDocs) => {
+            if (err) {
+                console.error("Error al insertar contactos iniciales:", err);
+            } else {
+                console.log("Contactos iniciales insertados:", newDocs);
+            }
+        });
+    } else {
+        console.log("Contactos ya presentes en la DB.");
+    }
+});
+
 function loadBackend (app){
     app.get(BASE_API+"/contacts",(request,response)=>{
         console.log("New GET to /contacts");
-        response.send(JSON.stringify(initialContacts));        
+        
         db.find({},(err,contacts)=>{
             response.send(JSON.stringify(contacts.map((c)=>{
-                delete c._id;
+                delete c._id; //esto sirve para que no enseñe al usuario el _id que no le importa
                 return c;
             }),null,2));
         });
@@ -61,7 +76,7 @@ function loadBackend (app){
         db.remove({ "name" : name},{},(err,numRemoved)=>{
             if(err){
                 response.status(500).send("Error code 01 (please contact admin)");                
-                console.error(`ÈRROR: ${err}`);
+                console.error(`ERROR: ${err}`);
             }else{
                 if(numRemoved >= 1){
                     response.sendStatus(200);
