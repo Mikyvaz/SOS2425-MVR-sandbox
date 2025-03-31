@@ -1,6 +1,11 @@
+
+
 import dataStore from "nedb";
 const BASE_API = "/api/v1";
 let db = new dataStore();
+
+
+
 let initialContacts = [
     {
         name: "peter",
@@ -15,6 +20,7 @@ let initialContacts = [
         phone: 5873420
     }
 ]
+
 db.find({}, (err, contacts)=>{
     if (contacts.length < 1){
         db.insert(initialContacts); //faltaría tratar los errores y eso. 
@@ -74,4 +80,4 @@ function loadBackend (app){
 
 
 
-export {loadBackend }; // cuando haga un require podré utilizar estos elementos. 
+export {loadBackend}; // cuando haga un require podré utilizar estos elementos. 

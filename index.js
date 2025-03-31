@@ -7,8 +7,12 @@ import { loadBackend } from "./src/back/index.js";
 const app = express();
 const PORT = process.env.PORT || 16078;
 
+
+
 app.use(express.json());
 app.use("/", express.static("./public"));
+
+
 
 loadBackend(app);
 
